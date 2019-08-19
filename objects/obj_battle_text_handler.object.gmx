@@ -26,16 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>text = ""           //Text to be displayed in textbox
-textNew = ""        //Next textbox
-style = 0           //What will the textbox look like?
-talker = noone      //Who is talking?
 timer = 0           //Timer for text delay
-showing = 0         //Are we done here?
+showing = false     //Are we displaying?
+done = false        //Is the current text done?
+a = 0               //Number of characters to display
 //Set the alarm to format the text
-alarm[0] = 1
-//Create cutscene shutters
-if !instance_exists(obj_cutscene_shutters)
-    instance_create(0,0,obj_cutscene_shutters)
+//alarm[0] = 1
 
 </string>
           </argument>
@@ -61,21 +57,13 @@ if !instance_exists(obj_cutscene_shutters)
             <kind>1</kind>
             <string>///Set up the textbox
 //Format the text to the correct width
-text = string_make_width(text,308)
+text = string_make_width(text,284)
 
 //Split up the message if it is too long
 event_user(0)
 
-//Define the textbox's location
-//Top of screen
-if talker.bbox_top-view_yview[0] &gt;= 60
-    direct = 1
-//Bottom of screen
-else
-    direct = -1
-
 //The text should start displaying now
-showing = 1
+showing = true
 </string>
           </argument>
         </arguments>
@@ -98,40 +86,38 @@ showing = 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Button Press Detection
-if keyboard_check_pressed(cs_acceptKey)
-{
-    //If text is being displayed
-    if showing = 1
-    {
-    
-        //If the full message is not displayed yet, display it all
-        if a &lt;= string_length(text)
-            a = string_length(text)+1
-    
-        //Otherwise
-        else
-        {
-            //If there is more to be displayed
-            if textNew != ""
-            {
-                //Make the new text the current text
-                text = textNew
-                textNew = ""
-                //Split up the message if it is too long
-                event_user(0)
-            }
-            //Otherwise
-            else
-            {
-                //Reset the state of the shift key
-                keyboard_clear(cs_acceptKey)
-                //Destroy the message box
-                instance_destroy()
-            }
-        }
-    }
-}
+            <string>///Battle text logic
+//If the full message is being displayed
+if a &gt;= string_length(text) &amp;&amp; text != ""
+    done = true
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Text Reset
+text = ""
+a = 0
+done = false
+showing = false
 </string>
           </argument>
         </arguments>
@@ -166,12 +152,9 @@ for(i = 1; i &lt;= string_length(text); i += 1)
     {
         //Increment the number of newlines
         newlines += 1
-        //At the third newline
-        if newlines = 3
+        //At the second newline
+        if newlines = 2
         {
-            //Split off the lines after the third line to be displayed later
-            textNew = string_copy(text,i+1,string_length(text)-i)
-            text = string_copy(text,1,i)
             //Break out of the loop
             break
         }
@@ -204,78 +187,20 @@ a = 0
           <argument>
             <kind>1</kind>
             <string>///Draw the text
-//Set the font and color
+//Set the font
 draw_set_font(global.font)
 
-//If the text should be displayed
-if showing == 1
-{
-    //Draw black rectangle for behind talker name
-    if string_length(talker.name) &gt; 0
-    {
-        draw_set_color(c_black)
-        if direct == 1
-            draw_rectangle(4,-1,(string_length(talker.name)*7)+10,12,0)
-        else
-            draw_rectangle(4,SCREEN_HEIGHT-54,(string_length(talker.name)*7)+10,SCREEN_HEIGHT-41,0)
-        draw_set_color(c_white)
-    }
-    //Draw the textbox
-    if direct == 1
-        draw_sprite(spr_textbox,style,0,12)
-    else
-        draw_sprite(spr_textbox,style,0,SCREEN_HEIGHT-41)
-    
-    
-    //Draw the textbox tail and talker name
-    if style == 0
-    {
-        //Write the talker's name
-        draw_set_color(c_white)
-        if direct == 1
-            draw_text(8,1,talker.name)
-        else
-            draw_text(8,SCREEN_HEIGHT-52,talker.name)
-        
-        //Get alignment
-        var align = talker.x-view_xview[0]
-        //Facing down
-        if direct == 1
-        {
-            //Extreme Left alignment
-            if align &lt;= 8
-                draw_sprite(spr_textbox_tail,1,8,51)
-            //Extreme Right alignment
-            else if align &gt;= SCREEN_WIDTH-8
-                draw_sprite(spr_textbox_tail,2,SCREEN_WIDTH-8,51)
-            //Normal alignment
-            else
-                draw_sprite(spr_textbox_tail,0,align,51)
-        }
-        //Facing up
-        else
-        {
-            //Extreme Left alignment
-            if align &lt;= 8
-                draw_sprite_ext(spr_textbox_tail,1,8,SCREEN_HEIGHT-40,1,-1,1,c_white,1)
-            //Extreme Right alignment
-            else if align &gt;= SCREEN_WIDTH-8
-                draw_sprite_ext(spr_textbox_tail,2,SCREEN_WIDTH-8,SCREEN_HEIGHT-40,1,-1,1,c_white,1)
-            //Normal alignment
-            else
-                draw_sprite_ext(spr_textbox_tail,0,align,SCREEN_HEIGHT-40,1,-1,1,c_white,1)
-        }
-    }
+//Draw the textbox
+draw_sprite(spr_battle_menu,0,8,12)
 
+//If the text should be displayed
+if showing == true
+{
     //Increment the number of letters that should be displayed
     if a &lt;= string_length(text)
         a += 1
     //Draw the text up to the number of letters that should be displayed
-    draw_set_color(c_black)
-    if direct == 1
-        draw_text(8,16,string_copy(text,1,a))
-    else
-        draw_text(8,SCREEN_HEIGHT-37,string_copy(text,1,a))
+    draw_text_ext(16,20,string_copy(text,1,a),4,284)
 }
 </string>
           </argument>

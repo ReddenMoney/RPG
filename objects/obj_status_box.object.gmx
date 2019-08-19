@@ -2,9 +2,9 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
-  <depth>0</depth>
-  <persistent>-1</persistent>
+  <visible>-1</visible>
+  <depth>-1</depth>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,15 +25,48 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Game startup
-//Set font
-global.font = font_add_sprite(spr_text,ord('!'),0,0)
-global.damageFont = font_add_sprite(spr_damage_num,ord('0'),0,0)
-draw_set_font(global.font)
-//Set gui size
-display_set_gui_size(view_wview[0], view_hview[0])
-//Initialize item definitions
-scr_item_defs()
+            <string>///A status box for a party member
+owner = noone
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Status Box
+draw_sprite(spr_status_box,0,x-36,view_hview[0]-70)
+
+//Draw name
+draw_set_halign(fa_center)
+draw_text(x,view_hview[0]-64,owner.name)
+//Draw HP and SP
+draw_set_halign(fa_left)
+draw_text(x-28,view_hview[0]-52,"HP")
+draw_set_halign(fa_right)
+draw_text(x+(floor(log10(owner.MaxHP))*7),view_hview[0]-52,owner.HP)
+draw_text(x+28,view_hview[0]-43,"/"+string(owner.MaxHP))
+draw_set_halign(fa_left)
+draw_text(x-28,view_hview[0]-33,"SP")
+draw_set_halign(fa_right)
+draw_text(x+(floor(log10(owner.MaxSP))*7),view_hview[0]-33,owner.SP)
+draw_text(x+28,view_hview[0]-24,"/"+string(owner.MaxSP))
+draw_set_halign(fa_left)
 </string>
           </argument>
         </arguments>
