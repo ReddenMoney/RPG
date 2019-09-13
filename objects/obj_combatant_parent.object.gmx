@@ -45,7 +45,7 @@ spd = 10
 2 = She/Her/Her
 3 = They/Them/Their
 */
-pronouns = 0
+pronouns = cs_it
 //Article to use referring to combatant at start of battle
 /*
 0 = None
@@ -53,7 +53,7 @@ pronouns = 0
 2 = The
 3 = Some (not technically an article but Shut Up)
 */
-article = 0
+article = cs_article_none
 
 //Stat Modifiers
 /*

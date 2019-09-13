@@ -51,7 +51,7 @@
             <string>if controller != noone
 {
     x = controller.x
-    y = controller.y-controller.sprite_height-4
+    y = controller.y-controller.sprite_height-1
 }
 </string>
           </argument>

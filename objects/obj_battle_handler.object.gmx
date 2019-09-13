@@ -200,6 +200,8 @@ if state == battleState.START
 if state == battleState.CHOOSE
 {
     //Loop through each party member and ask what they wanna do
+    if partyChoose &lt; 0
+        partyChoose = 0
     if partyChoose &lt; ds_list_size(partyList)
         with partyList[| partyChoose]
             event_user(0)

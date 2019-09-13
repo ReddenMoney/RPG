@@ -87,26 +87,24 @@ if keyboard_check_pressed(cs_acceptKey)
 &amp;&amp; !instance_exists(obj_battle_starter)
 &amp;&amp; !instance_exists(obj_battle_handler)
 {
-    var npc;
+    var interact;
     //Check in specific directions depending on direct
     switch (direct)
     {
     case cs_left:
-        npc = collision_rectangle(bbox_left-32,bbox_top-8,bbox_right,bbox_bottom+8,obj_NPC_parent,0,0); break;
+        interact = collision_rectangle(bbox_left-16,bbox_top-2,bbox_right,bbox_bottom+2,obj_interact_parent,0,0); break;
     case cs_right:
-        npc = collision_rectangle(bbox_left,bbox_top-8,bbox_right+32,bbox_bottom+8,obj_NPC_parent,0,0); break;
+        interact = collision_rectangle(bbox_left,bbox_top-2,bbox_right+16,bbox_bottom+2,obj_interact_parent,0,0); break;
     case cs_up:
-        npc = collision_rectangle(bbox_left-8,bbox_top-32,bbox_right+8,bbox_bottom,obj_NPC_parent,0,0); break;
+        interact = collision_rectangle(bbox_left-2,bbox_top-16,bbox_right+2,bbox_bottom,obj_interact_parent,0,0); break;
     case cs_down:
-        npc = collision_rectangle(bbox_left-8,bbox_top,bbox_right+8,bbox_bottom+32,obj_NPC_parent,0,0); break;
+        interact = collision_rectangle(bbox_left-2,bbox_top,bbox_right+2,bbox_bottom+16,obj_interact_parent,0,0); break;
     }
 
-    if npc
+    if interact
     {
-        t = instance_create(0,0,obj_text_handler)
-        t.talker = npc.id
-        t.text = t.talker.text
-    }   
+        with interact event_user(0)
+    }
 }
 
 </string>

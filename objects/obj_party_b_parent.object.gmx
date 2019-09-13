@@ -27,9 +27,12 @@
             <kind>1</kind>
             <string>event_inherited()
 chosenTarget = obj_enemy_b_parent
+charConst = 0
 with instance_create(x,y,obj_status_box) owner = other.id
 //The key set by the battle menu that is used to Actually perform the move
 moveKey = -1
+//The chosen item slot to use from
+chosenItem = 0
 </string>
           </argument>
         </arguments>
@@ -55,7 +58,12 @@ moveKey = -1
             <string>///Perform action after text announcing it is done
 if obj_battle_text_handler.done == true
 {
-    script_execute(chosenMove, scr_get_atk_strength(moveKey), scr_get_atk_element(moveKey), chosenTarget)
+    //Item Use
+    if moveKey == move.useItem
+        script_execute(chosenMove, charConst, chosenItem, chosenTarget)
+    //Other Moves
+    else
+        script_execute(chosenMove, scr_get_atk_strength(moveKey), scr_get_atk_element(moveKey), chosenTarget)
 }
 else
     alarm[0] = 1

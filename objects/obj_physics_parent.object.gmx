@@ -28,11 +28,17 @@
             <string>///Stop from moving into another physical object
 //Horizontally
 if collision_rectangle(bbox_left+hspeed,bbox_top,bbox_right+hspeed,bbox_bottom,obj_physics_parent,0,1)
+{
     x -= hspeed
+    hspeed = 0
+}
 //Vertically
 if collision_rectangle(bbox_left,bbox_top+vspeed,bbox_right,bbox_bottom+vspeed,obj_physics_parent,0,1)
+{
     y -= vspeed
-depth = -y
+    vspeed = 0
+}
+depth = -bbox_bottom
 </string>
           </argument>
         </arguments>

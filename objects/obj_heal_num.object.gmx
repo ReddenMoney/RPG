@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-100</depth>
+  <depth>-2</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,14 +25,35 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>text = ""           //Text to be displayed in textbox
-timer = 0           //Timer for text delay
-showing = false     //Are we displaying?
-done = false        //Is the current text done?
-a = 0               //Number of characters to display
-//Set the alarm to format the text
-//alarm[0] = 1
-
+            <string>///Indicate how much healing was done
+heal = 0
+type = cs_HP
+alarm[0] = 15
+vspeed = 1.5
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy the heal indicator
+instance_destroy()
 </string>
           </argument>
         </arguments>
@@ -55,21 +76,16 @@ a = 0               //Number of characters to display
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Set up the textbox
-//Format the text to the correct width
-text = string_make_width(text,284)
-
-//Split up the message if it is too long
-event_user(0)
-
-//The text should start displaying now
-showing = true
+            <string>///Stop the number
+vspeed = 0
+//Set it up to be deleted
+alarm[1] = 40
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -86,127 +102,18 @@ showing = true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Battle text logic
-//If the full message is being displayed
-if a &gt;= string_length(text) &amp;&amp; text != ""
-    done = true
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="11">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Text Reset
-text = ""
-a = 0
-done = false
-showing = false
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Textbox splitter
-//The number of newlines in the message
-newlines = 0
-
-//Iterate over all the characters in the message
-for(i = 1; i &lt;= string_length(text); i += 1)
-{
-    //If the current character is a newline
-    if string_char_at(text,i) = "#"
-    {
-        //Increment the number of newlines
-        newlines += 1
-        //At the second newline
-        if newlines = 2
-        {
-            //Break out of the loop
-            break
-        }
-    }
-
-}
-
-//Set the number of characters being displayed
-a = 0
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Draw the text
+            <string>///Draw the heal amount
 //Set the font
+draw_set_font(global.damageFont)
+draw_set_halign(fa_center)
+if type == cs_SP
+    draw_set_color($FF69B4)
+else
+    draw_set_color(c_green)
+draw_text(x,y,heal)
+draw_set_color(c_white)
+draw_set_halign(fa_left)
 draw_set_font(global.font)
-
-//Draw the textbox
-draw_sprite(spr_battle_menu,0,8,12)
-
-//If the text should be displayed
-if showing == true
-{
-    //Increment the number of letters that should be displayed
-    if a &lt;= string_length(text)
-        a += 1
-    //Draw the text up to the number of letters that should be displayed
-    draw_text_ext(16,20,string_copy(text,1,a),4,284)
-    //If the text is done, draw an arrow to let the player know
-    //if done
-        //draw_sprite(spr_pointer_v,1,300,43)
-}
-
-
 </string>
           </argument>
         </arguments>

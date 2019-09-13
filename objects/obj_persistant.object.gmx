@@ -32,6 +32,8 @@ global.damageFont = font_add_sprite(spr_damage_num,ord('0'),0,0)
 draw_set_font(global.font)
 //Set gui size
 display_set_gui_size(view_wview[0], view_hview[0])
+//Initialize stats
+scr_init_stats()
 //Initialize item definitions
 scr_item_defs()
 </string>
