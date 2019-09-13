@@ -7,21 +7,21 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>1</bbox_left>
-  <bbox_right>318</bbox_right>
-  <bbox_top>1</bbox_top>
-  <bbox_bottom>42</bbox_bottom>
+  <bbox_left>0</bbox_left>
+  <bbox_right>232</bbox_right>
+  <bbox_top>0</bbox_top>
+  <bbox_bottom>61</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>320</width>
-  <height>48</height>
+  <width>234</width>
+  <height>62</height>
   <frames>
-    <frame index="0">images\spr_textbox_0.png</frame>
-    <frame index="1">images\spr_textbox_1.png</frame>
-    <frame index="2">images\spr_textbox_2.png</frame>
+    <frame index="0">images\spr_battle_magic_menu_0.png</frame>
+    <frame index="1">images\spr_battle_magic_menu_1.png</frame>
+    <frame index="2">images\spr_battle_magic_menu_2.png</frame>
   </frames>
 </sprite>
