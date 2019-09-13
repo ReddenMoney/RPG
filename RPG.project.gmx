@@ -7,61 +7,224 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="Playable Characters">
-      <sprite>sprites\spr_knife</sprite>
+      <sprite>sprites\spr_knife_f</sprite>
     </sprites>
     <sprites name="NPCs">
       <sprite>sprites\spr_NPC</sprite>
+    </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\spr_pigmask_b</sprite>
+    </sprites>
+    <sprites name="Interactable">
+      <sprite>sprites\spr_item_box</sprite>
     </sprites>
     <sprites name="UI">
       <sprite>sprites\spr_textbox</sprite>
       <sprite>sprites\spr_textbox_tail</sprite>
       <sprite>sprites\spr_status_box</sprite>
       <sprite>sprites\spr_battle_menu</sprite>
+      <sprite>sprites\spr_battle_item_menu</sprite>
+      <sprite>sprites\spr_battle_magic_menu</sprite>
+      <sprite>sprites\spr_battle_target</sprite>
       <sprite>sprites\spr_text</sprite>
       <sprite>sprites\spr_icons</sprite>
+      <sprite>sprites\spr_item_icons</sprite>
       <sprite>sprites\spr_pointer</sprite>
+      <sprite>sprites\spr_pointer_v</sprite>
+      <sprite>sprites\spr_target_arrow</sprite>
+      <sprite>sprites\spr_damage_num</sprite>
     </sprites>
     <sprites name="Other">
       <sprite>sprites\spr_solid</sprite>
+      <sprite>sprites\spr_enemy_mask</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\string_make_width.gml</script>
+    <scripts name="Initialization">
+      <script>scripts\scr_init_stats.gml</script>
+      <script>scripts\scr_item_structure.gml</script>
+      <script>scripts\scr_item_defs.gml</script>
+      <script>scripts\scr_add_item_def.gml</script>
+    </scripts>
+    <scripts name="Battle">
+      <scripts name="Calculations">
+        <script>scripts\scr_damage_calc_phy.gml</script>
+        <script>scripts\scr_damage_calc_mag.gml</script>
+        <script>scripts\scr_stat_mod.gml</script>
+        <script>scripts\scr_get_atk_strength.gml</script>
+        <script>scripts\scr_get_atk_element.gml</script>
+        <script>scripts\scr_get_article_start.gml</script>
+        <script>scripts\scr_get_article_b.gml</script>
+      </scripts>
+      <scripts name="Moves">
+        <script>scripts\scr_physical_attack.gml</script>
+        <script>scripts\scr_magic_attack.gml</script>
+        <script>scripts\scr_cast_spell.gml</script>
+        <script>scripts\scr_heal.gml</script>
+        <script>scripts\scr_inflict_ailment.gml</script>
+        <script>scripts\scr_cure_ailment.gml</script>
+        <script>scripts\scr_raise_stat.gml</script>
+        <script>scripts\scr_lower_stat.gml</script>
+        <script>scripts\scr_waste_turn.gml</script>
+      </scripts>
+      <scripts name="Declarations">
+        <script>scripts\scr_battle_text.gml</script>
+        <script>scripts\scr_declare_moves.gml</script>
+        <script>scripts\scr_move_name.gml</script>
+        <script>scripts\scr_sp_cost.gml</script>
+        <script>scripts\scr_move_desc.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="Utility/Accessors">
+      <script>scripts\string_make_width.gml</script>
+      <script>scripts\scr_a_or_an.gml</script>
+      <script>scripts\scr_get_char_name.gml</script>
+      <script>scripts\scr_get_item_name.gml</script>
+      <script>scripts\scr_get_item_desc.gml</script>
+      <script>scripts\scr_get_item_use_desc.gml</script>
+      <script>scripts\scr_item_use_text.gml</script>
+      <script>scripts\scr_get_item_type.gml</script>
+      <script>scripts\scr_get_item_article.gml</script>
+      <script>scripts\scr_get_item_singular_plural.gml</script>
+      <script>scripts\scr_get_item_text.gml</script>
+      <script>scripts\scr_get_item_statUp.gml</script>
+      <script>scripts\scr_get_pronoun_b.gml</script>
+      <script>scripts\scr_get_pronoun_possess_b.gml</script>
+    </scripts>
+    <scripts name="Items">
+      <script>scripts\scr_item_get.gml</script>
+      <script>scripts\scr_item_use.gml</script>
+      <script>scripts\scr_item_remove.gml</script>
+      <script>scripts\scr_num_items_held.gml</script>
+      <script>scripts\scr_item_healHP.gml</script>
+      <script>scripts\scr_item_healFullHP.gml</script>
+      <script>scripts\scr_item_healSP.gml</script>
+      <script>scripts\scr_item_healFullSP.gml</script>
+      <script>scripts\scr_item_healHP_statUp.gml</script>
+      <script>scripts\scr_item_healHP_SP.gml</script>
+      <script>scripts\scr_item_healFullHP_SP.gml</script>
+      <script>scripts\scr_item_heal_hurt.gml</script>
+      <script>scripts\scr_item_healHP_split.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_courier</font>
   </fonts>
   <objects name="objects">
-    <objects name="Playable Characters">
-      <object>objects\obj_knife_f</object>
-    </objects>
-    <objects name="NPCs">
-      <object>objects\obj_NPC_parent</object>
-    </objects>
-    <objects name="Collision">
-      <object>objects\obj_solid</object>
-    </objects>
     <objects name="Game Control">
       <object>objects\obj_text_handler</object>
       <object>objects\obj_physics_parent</object>
       <object>objects\obj_persistant</object>
       <object>objects\obj_cutscene_shutters</object>
-      <object>objects\obj_battle_handler</object>
+    </objects>
+    <objects name="Playable Characters">
+      <object>objects\obj_knife_f</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\obj_enemy_f_parent</object>
+    </objects>
+    <objects name="Interactable">
+      <object>objects\obj_interact_parent</object>
+      <objects name="NPCs">
+        <object>objects\obj_NPC_parent</object>
+      </objects>
+      <object>objects\obj_item_box</object>
+    </objects>
+    <objects name="Battle">
+      <objects name="Control">
+        <object>objects\obj_battle_starter</object>
+        <object>objects\obj_battle_handler</object>
+        <object>objects\obj_combatant_parent</object>
+        <object>objects\obj_enemy_b_parent</object>
+        <object>objects\obj_party_b_parent</object>
+        <object>objects\obj_battle_text_handler</object>
+        <object>objects\obj_damage_num</object>
+        <object>objects\obj_heal_num</object>
+        <object>objects\obj_status_box</object>
+        <object>objects\obj_battle_menu</object>
+        <object>objects\obj_target_arrow</object>
+      </objects>
+      <objects name="Enemies">
+        <object>objects\obj_pigmask_b</object>
+      </objects>
+      <objects name="Party">
+        <object>objects\obj_knife_b</object>
+      </objects>
+    </objects>
+    <objects name="Collision">
+      <object>objects\obj_solid</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>
   </rooms>
-  <constants number="7">
+  <constants number="64">
     <constant name="cs_acceptKey">vk_shift</constant>
+    <constant name="cs_declineKey">vk_control</constant>
     <constant name="cs_up">0</constant>
     <constant name="cs_down">1</constant>
     <constant name="cs_left">2</constant>
     <constant name="cs_right">3</constant>
     <constant name="SCREEN_WIDTH">320</constant>
     <constant name="SCREEN_HEIGHT">240</constant>
+    <constant name="cs_neutral">0</constant>
+    <constant name="cs_fire">1</constant>
+    <constant name="cs_ice">2</constant>
+    <constant name="cs_elec">3</constant>
+    <constant name="cs_water">4</constant>
+    <constant name="cs_explosion">5</constant>
+    <constant name="NUM_ELEMENTS">6</constant>
+    <constant name="cs_blind">0</constant>
+    <constant name="cs_confuse">1</constant>
+    <constant name="cs_paralyze">2</constant>
+    <constant name="cs_sleep">3</constant>
+    <constant name="cs_poison">4</constant>
+    <constant name="cs_burn">5</constant>
+    <constant name="cs_freeze">6</constant>
+    <constant name="cs_bleed">7</constant>
+    <constant name="cs_amnesia">8</constant>
+    <constant name="cs_magiclock">9</constant>
+    <constant name="cs_flipped">10</constant>
+    <constant name="cs_death">11</constant>
+    <constant name="NUM_AILMENTS">12</constant>
+    <constant name="cs_HP">0</constant>
+    <constant name="cs_SP">1</constant>
+    <constant name="cs_atk">2</constant>
+    <constant name="cs_def">3</constant>
+    <constant name="cs_mAtk">4</constant>
+    <constant name="cs_mDef">5</constant>
+    <constant name="cs_spd">6</constant>
+    <constant name="INVENTORY_SIZE">16</constant>
+    <constant name="cs_weapon">0</constant>
+    <constant name="cs_body">1</constant>
+    <constant name="cs_head">2</constant>
+    <constant name="cs_accessory">3</constant>
+    <constant name="cs_eat">4</constant>
+    <constant name="cs_drink">5</constant>
+    <constant name="cs_use">6</constant>
+    <constant name="cs_spray">7</constant>
+    <constant name="cs_shoot">8</constant>
+    <constant name="cs_throw">9</constant>
+    <constant name="cs_empty">-1</constant>
+    <constant name="cs_char_knife">0</constant>
+    <constant name="cs_char_bat">1</constant>
+    <constant name="cs_char_brawl">2</constant>
+    <constant name="cs_char_invent">3</constant>
+    <constant name="cs_article_none">0</constant>
+    <constant name="cs_article_a_an">1</constant>
+    <constant name="cs_article_the">2</constant>
+    <constant name="cs_article_some">3</constant>
+    <constant name="cs_single">0</constant>
+    <constant name="cs_plural">1</constant>
+    <constant name="cs_allFoes">99</constant>
+    <constant name="cs_allParty">-99</constant>
+    <constant name="cs_everyone">0</constant>
+    <constant name="cs_it">0</constant>
+    <constant name="cs_he">1</constant>
+    <constant name="cs_she">2</constant>
+    <constant name="cs_they">3</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
