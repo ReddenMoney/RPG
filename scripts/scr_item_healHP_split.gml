@@ -1,11 +1,10 @@
-///scr_item_healHP(amount,target)
+///scr_item_healHP_split(amount)
 /*
 **  Usage:
-**      scr_item_healHP(amount,target)
+**      scr_item_healHP_split(amount)
 **
 **  Given:
 **      amount          How much is being healed?
-**      target          Who is being healed?
 **
 */
 

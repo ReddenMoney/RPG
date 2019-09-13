@@ -14,8 +14,8 @@ SmFry, MdFry, LgFry, FireFry, SteakFry,
 KidCola, Cola, LgCola, OrangeJuice, Lemonade, EnDrink, SwTea, UnSwTea, GrnTea,
 BlkCoffee, Cappuccino, Espresso, Cocoa,
 ChknSand, HotChknSand, SalmonSash, CARoll, Tempura, FireChknCurry,
-Bento, Hibachi, PsnlPizza, MdPizza, LgPizza, LeftPizza,
-Ribeye, BBQRibs, BakePotat, LoadedPotat, BreadRoll,
+Bento, GasStationSushi, Hibachi, SmPizza, MdPizza, LgPizza, LeftPizza,
+Steak, BBQRibs, BakePotat, LoadedPotat, BreadRoll,
 Hotdog, Chilidog, FriedChkn, GrillChkn, ChknStrips, ChknNuggs,
 Catfish, GrillSalmon, ShrimpCock, FruitBskt, GarSalad, Picnic,
 BeefJerky, PotatChips, VinegarChips, HotChips,
@@ -37,5 +37,5 @@ length
 }
 
 //Properties of items
-enum ItemProp {name, desc, type, useScr, 
+enum ItemStruct {name, desc, type, useScr, article, plural,
 HP, SP, atk, def, mAtk, mDef, spd, equipBy, length}

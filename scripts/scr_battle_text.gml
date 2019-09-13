@@ -4,7 +4,7 @@
 **      scr_battle_text(key)
 **
 **  Given:
-**      key         A shorthand to the battle text
+**      key         The move being done
 **
 **  Returns:
 **      Text for battle marquee
@@ -12,6 +12,10 @@
 
 switch argument0
 {
+case move.useItem:  chosenMove = scr_item_use
+    //Item use text generation
+    return scr_item_use_text(global.inventory[charConst,chosenItem])
+    break;
 case move.smile: chosenMove = scr_waste_turn;
     return scr_get_article_b(self,true) + " gave a sly smile!";
     break;

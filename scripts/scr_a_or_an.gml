@@ -4,8 +4,8 @@
 **      scr_a_or_an(word,capital)
 **
 **  Given:
-**      word = The word that should be checked
-**      capital = Whether it should be capital or not
+**      word         The word that should be checked
+**      capital      Whether it should be capital or not
 **
 **  Returns:
 **      "a", "an", "A", or "An"

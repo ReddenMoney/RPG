@@ -1,7 +1,7 @@
-///scr_add_item_def(key, name, desc, type, useScr, HP/status, SP, atk, def, mAtk, mDef, spd, equipBy)
+///scr_add_item_def(key, name, desc, type, useScr, article, plural, HP/status, SP, atk, def, mAtk, mDef, spd, equipBy)
 /*
 **  Usage:
-**      scr_add_item_def(key, name, desc, type, useScr, HP/status, SP, atk, def, mAtk, mDef, spd, equipBy)
+**      scr_add_item_def(key, name, desc, type, useScr, article, plural, HP/status, SP, atk, def, mAtk, mDef, spd, equipBy)
 **
 **  Given:
 **      key         Keyname of item (defined in scr_item_structure)
@@ -9,6 +9,9 @@
 **      desc        Item Description
 **      type        What type of item it is
 **      useScr      The script that is called when used
+**      article     Article to refer to with (none, a/an, the, some)
+**                  (ie cs_article_a_an)
+**      plural      Is the item plural?
 **      HP/status   Equipment:  Amount to raise base HP
 **                  Consumable: Amount of HP to heal/Status to cure
 **      SP          Equipment:  Amount to raise base SP
@@ -32,16 +35,16 @@
 
 //Set up item definitions
 var i;
-for (i=1;i<argument_count&&i<13;i++)
+for (i=1;i<argument_count&&i<ItemStruct.length;i++)
 {
-    itemDefs[argument[0],i-1] = argument[i];
+    global.itemDefs[argument[0],i-1] = argument[i];
 }
 //Set the rest to 0 (if needed)
-if argument_count != 13
+if argument_count != ItemStruct.length
 {
-    for (;i<13;i++)
+    for (;i<ItemStruct.length;i++)
     {
-        itemDefs[argument[0],i-1] = 0;
+        global.itemDefs[argument[0],i-1] = 0;
     }
 }
 
